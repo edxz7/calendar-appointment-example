@@ -3,17 +3,19 @@ const { Schema, model } = require('mongoose');
 const appointmentSchema = new Schema(
     {
         date: Date,
+        // el userId para appointments es solo para usuarios normales
+        userId: {
+            type: Schema.Types.ObjectId,
+            red: 'User' 
+        },
         blockTimeUnit: {
             type: String,
             default: '60'
         },
-        scheduledTime: [{
-            type: Number,
-            validate : {
-                validator : Number.isInteger,
-                message   : '{VALUE} is not an integer value'
-              }
-        }]
+        calendar: {
+            type: Schema.Types.ObjectId,
+            red: 'Calendar' 
+        },
     }
 )
 
