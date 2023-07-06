@@ -1,0 +1,15 @@
+.box {
+  background-color: white;
+  /* cursor: pointer; */
+  /* border: 1px solid black; */
+  height: 25px;
+  width: auto;  
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  text-align: center;
+} 
+
+.hide-text {
+  color: rgba(0, 0, 0, 0);
+}
