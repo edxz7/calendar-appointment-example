@@ -58,8 +58,7 @@ router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
   // Si ya hay información asociada al calendario (contenida en calendarData), la función createCalendar la usuara para crear el calendario
   // si no hay información previa calendario, nos dara lo necesario para pintar un calendario vacio 
   // si queremos limitar el rango de horas a menos de 24, indicamos un "start" y un "end" hour
-  const calendar = createCalendar(calendarData);
-  console.log('calendar: ', calendar.rows[23].cols);
+  const calendar = createCalendar(calendarData, 6, 20);
 
 
   // console.log('data: ', data)
