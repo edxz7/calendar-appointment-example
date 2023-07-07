@@ -5,7 +5,7 @@ const isLoggedIn = require('../middleware/isLoggedIn');
 const isAdmin = require('../middleware/isAdmin');
 const Appointment = require('../models/Calendar.model');
 
-// Esta ruta solo puede ser llamada por noraml users
+// Esta ruta solo puede ser llamada por normal users
 router.post('/create', isLoggedIn, isAdmin, async (req, res, next) => {
     console.log('req.body: ', req.body);
     const { _id: userId } = req.session.currentUser;
