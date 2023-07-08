@@ -27,6 +27,14 @@
                                                 <input type="checkbox" class="btn-check" id="btn-check-outlined-{{day}}-{{hour}}" checked autocomplete="off" name="{{day}}" value="{{hour}}">
                                                 <label class="btn btn-outline-success d-block hide-text" for="btn-check-outlined-{{day}}-{{hour}}"> + </label>
                                             </td>
+
+                                        {{else if isBooked}} 
+                                        
+                                            <td class="p-0"> 
+                                                <input type="checkbox" class="btn-check" id="btn-check-outlined-{{day}}-{{hour}}" checked autocomplete="off" name="{{day}}" value="{{hour}}">
+                                                <label class="btn btn-outline-danger d-block hide-text" for="btn-check-outlined-{{day}}-{{hour}}"> + </label>
+                                            </td>   
+
                                         {{else}}
                                             <td class="p-0"> 
 
@@ -70,6 +78,14 @@
                                                 <input type="checkbox" class="btn-check" id="btn-check-outlined-{{day}}-{{hour}}" checked autocomplete="off" name="{{day}}" value="{{hour}}">
                                                 <label class="btn btn-outline-success d-block hide-text" for="btn-check-outlined-{{day}}-{{hour}}"> + </label>
                                             </td>
+
+                                        {{else if isBooked}} 
+                                        
+                                            <td class="p-0"> 
+                                                <input type="checkbox" class="btn-check" id="btn-check-outlined-{{day}}-{{hour}}" checked autocomplete="off" name="{{day}}" value="{{hour}}">
+                                                <label class="btn btn-outline-danger d-block hide-text" for="btn-check-outlined-{{day}}-{{hour}}"> + </label>
+                                            </td>   
+
                                         {{else}}
                                             <td class="p-0"> 
 
