@@ -1,0 +1,26 @@
+<div class="container">
+    {{#if users}}
+        {{#each users}}
+            <div class="card dark m-5">
+                <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="{{photo}}" class="img-fluid rounded-start" alt="">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="text-section">
+                            <h5 class="card-title">{{name}}</h5>
+                            <p class="card-text">{{description}}</p>
+                        </div>
+                        <div class="cta-section">
+                            <div>$129.00</div>
+                            <a href="/owner/{{_id}}/detail" class="btn btn-light">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>Coming soon we're not open calendars yet!</p>
+    {{/if}}
+</div>

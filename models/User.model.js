@@ -7,7 +7,6 @@ const userSchema = new Schema(
       type: String,
       trim: true,
       required: false,
-      unique: true
     },
     email: {
       type: String,
@@ -20,6 +19,11 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
+    photo: {
+      type: String,
+      default: "https://cdn0.iconfinder.com/data/icons/communication-456/24/account_profile_user_contact_person_avatar_placeholder-512.png"
+    },
+    description: String,
     role: {
       type: String,
       enum: ['User', 'Admin'],
