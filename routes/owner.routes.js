@@ -17,7 +17,7 @@ router.get('/list', isLoggedIn, isUser, async (req, res, next) => {
     res.render('owner/list', { users })
 })
 
-router.get('/:userId/detail', isUser, isLoggedIn, async (req, res, next) => {
+router.get('/:userId/detail', isLoggedIn, isUser, async (req, res, next) => {
     // seleccionamos al owner del calendario para tener su id
     const { userId } = req.params;
 
