@@ -28,9 +28,11 @@ const indexRoutes = require("./routes/index.routes");
 app.use("/", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
-const calendarImageRoutes = require("./routes/calendar.routes") // add at line 32
+const calendarRoutes = require("./routes/calendar.routes");
+const ownerRoutes = require('./routes/owner.routes');
 app.use("/auth", authRoutes);
-app.use("/calendar", calendarImageRoutes);
+app.use("/calendar", calendarRoutes);
+app.use("/owner", ownerRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

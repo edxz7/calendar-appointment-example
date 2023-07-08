@@ -6,7 +6,7 @@ const appointmentSchema = new Schema(
         // el userId para appointments es solo para usuarios normales
         userId: {
             type: Schema.Types.ObjectId,
-            red: 'User' 
+            ref: 'User' 
         },
         blockTimeUnit: {
             type: String,
@@ -14,7 +14,7 @@ const appointmentSchema = new Schema(
         },
         calendar: {
             type: Schema.Types.ObjectId,
-            red: 'Calendar' 
+            ref: 'Calendar' 
         },
     }
 )
