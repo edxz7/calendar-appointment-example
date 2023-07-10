@@ -8,8 +8,10 @@ const daySchema = new Schema(
         },
         date: Date,
         openTimeBlocks: [ Number ],
-        scheduledTimeBlocks: [ Number ],
-        cancelledTimeBlocks: [ Number ]
+        appointments: [ {
+            type: Schema.Types.ObjectId,
+            ref: 'Appointment'
+        } ],
     },
     {
         timestamps: true

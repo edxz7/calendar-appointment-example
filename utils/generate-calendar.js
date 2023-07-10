@@ -5,8 +5,7 @@
    * @param {*} endHour 
    * @returns 
    */
-  function createCalendar(calendarData, startHour = 0, endHour = 24) {
-    const weekDays = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
+  function generateCalendar(calendarData, startHour = 0, endHour = 24) {
     const data = {
       rows: []
     };
@@ -16,35 +15,30 @@
      *   {
      *     name: 'Lunes',
      *     openTimeBlocks: [ 4, 5 ],
-     *     scheduledTimeBlocks: [ 5 ] 
+     *     appointments: [{ _id, scheduledTimeBlocks: [ 4] }] 
      *   },
       *   {
      *     name: 'Martes',
      *     openTimeBlocks: [ 4, 5 ],
-     *     scheduledTimeBlocks: [ 5 ] 
+     *     appointments: [ { _id, scheduledTimeBlocks: [ 4, 5 ] } ] 
      *   },
      * ]
      * 
      * cuando no esta vacia
      */
-  
-    console.log('calendarData: ', calendarData);
-  
-    //
     for (let i = startHour; i < endHour; i++) {
-      
       let cols = []
-      for (let j = 0; j < weekDays.length; j++) {
-        const [dayOpenedOrScheduled] = calendarData ?
-        calendarData.days.filter(d => d.name === weekDays[j]) : []
-        console.log('dayOpenedOrScheduled: ', dayOpenedOrScheduled);
-        const isOpen = dayOpenedOrScheduled && dayOpenedOrScheduled.openTimeBlocks.includes(i)
-        const isBooked = dayOpenedOrScheduled && dayOpenedOrScheduled.scheduledTimeBlocks.includes(i)
+      for (const day of calendarData.days) {
+        // for (let j = 0; j < calendarData.day.length; j++) {
+        const { openTimeBlocks, appointments } = day;
+        const isOpen = openTimeBlocks && openTimeBlocks.includes(i)
+        // we summarize all the appointments of the day, and
+        const isBooked = appointments && appointments.flatMap(a => a.scheduledTimeBlocks).includes(i)
         cols.push({
           // revisamos si ya estaba abierto ese horario o si ya habia una reservacion 
           isOpen,
           isBooked,
-          day: weekDays[j],
+          day: day.name,
           hour: i
         })
       }
@@ -56,4 +50,4 @@
     return data;
   }
 
-  module.exports = createCalendar;
+  module.exports = generateCalendar;
