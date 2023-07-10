@@ -4,7 +4,7 @@ const Day = require('../models/Day.model');
 const isLoggedIn = require('../middleware/isLoggedIn');
 const isAdmin = require('../middleware/isAdmin');
 const Calendar = require('../models/Calendar.model');
-const createCalendar = require('../utils/create-calendar');
+const createCalendar = require('../utils/generate-calendar');
 const isUser = require('../middleware/isUser');
 
 // Esta ruta solo puede ser llamada por admins

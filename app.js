@@ -28,9 +28,11 @@ const indexRoutes = require("./routes/index.routes");
 app.use("/", indexRoutes);
 
 const authRoutes = require("./routes/auth.routes");
+const appointmentRoutes = require('./routes/appointment.routes');
 const calendarRoutes = require("./routes/calendar.routes");
 const ownerRoutes = require('./routes/owner.routes');
 app.use("/auth", authRoutes);
+app.use("/appointment", appointmentRoutes);
 app.use("/calendar", calendarRoutes);
 app.use("/owner", ownerRoutes);
 

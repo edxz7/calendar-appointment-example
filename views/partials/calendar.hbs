@@ -55,49 +55,48 @@
             <p>You are logged as Normal User</p>
             <p>You can schedule appointments in the available hours of you choosen calendar</p>
 
+            {{#if calendarId}}
+                <div class="row d-flex justify-content">
+                    <form action="/appointment/create/{{calendarId}}" method="post">
+                        <table class="table table-bordered" style="width: 500px;">
+                            <tr>
+                                <th scope="col" class="col-1">Timezone</th>
+                                <th scope="col" class="col-1">Lun</th>
+                                <th scope="col" class="col-1">Mar</th>
+                                <th scope="col" class="col-1">Mie</th>
+                                <th scope="col" class="col-1">Jue</th>
+                                <th scope="col" class="col-1">Vie</th>
+                                <th scope="col" class="col-1">Sab</th>
+                                <th scope="col" class="col-1">Dom</th>
+                            </tr>
+                                {{#each rows}}
+                                    <tr>
+                                        <td class="p-0"> <div class="box"> {{hour}}:00 </div> </td>
 
-            <div class="row d-flex justify-content">
-                <form action="/appointment/create/{{calendarId}}" method="post">
-                    <table class="table table-bordered" style="width: 500px;">
-                        <tr>
-                            <th scope="col" class="col-1">Timezone</th>
-                            <th scope="col" class="col-1">Lun</th>
-                            <th scope="col" class="col-1">Mar</th>
-                            <th scope="col" class="col-1">Mie</th>
-                            <th scope="col" class="col-1">Jue</th>
-                            <th scope="col" class="col-1">Vie</th>
-                            <th scope="col" class="col-1">Sab</th>
-                            <th scope="col" class="col-1">Dom</th>
-                        </tr>
-                            {{#each rows}}
-                                <tr>
-                                    <td class="p-0"> <div class="box"> {{hour}}:00 </div> </td>
-                                    {{#each cols}}
-                                        {{#if isOpen}}
-                                            <td class="p-0"> 
-                                                <input type="checkbox" class="btn-check" id="btn-check-{{day}}-{{hour}}" autocomplete="off" name="{{day}}" value="{{hour}}">
-                                                <label class="btn btn-success d-block hide-text" for="btn-check-{{day}}-{{hour}}"> + </label>
-                                            </td>
-
-                                        {{else if isBooked}} 
-                                        
-                                            <td class="p-0"> 
-                                                <input type="checkbox" class="btn-check" id="btn-check-outlined-{{day}}-{{hour}}" checked autocomplete="off" disabled>
-                                                <label class="btn btn-outline-danger d-block hide-text" for="btn-check-outlined-{{day}}-{{hour}}"> + </label>
-                                            </td>   
-
-                                        {{else}}
-                                            <td class="p-0"> 
-                                                <input type="checkbox" class="btn-check" id="btn-check-outlined-{{day}}-{{hour}}" autocomplete="off" disabled>
-                                            </td>
-                                        {{/if}}
-                                    {{/each}}
-                                </tr>
-                            {{/each}}
-                    </table>
-                    <button class="btn btn-primary" type="submit"> submit</button>
-                </form>
-            </div>
+                                        {{#each cols}}
+                                            {{#if isBooked}} 
+                                                <td class="p-0"> 
+                                                    <input type="checkbox" class="btn-check" id="btn-check-outlined-{{day}}-{{hour}}" checked autocomplete="off" disabled>
+                                                    <label class="btn btn-danger d-block hide-text" for="btn-check-outlined-{{day}}-{{hour}}">+</label>
+                                                </td>   
+                                            {{else if isOpen}}
+                                                <td class="p-0"> 
+                                                    <input type="checkbox" class="btn-check" id="btn-check-{{day}}-{{hour}}" autocomplete="off" name="{{day}}" value="{{hour}}">
+                                                    <label class="btn btn-success d-block hide-text" for="btn-check-{{day}}-{{hour}}"> + </label>
+                                                </td>
+                                            {{else}}
+                                                <td class="p-0"></td>
+                                            {{/if}}
+                                        {{/each}}
+                                    </tr>
+                                {{/each}}
+                        </table>
+                        <button class="btn btn-primary" type="submit"> submit</button>
+                    </form>
+                </div>
+            {{else}}
+                Currently this owner has not setup a calendar
+            {{/if}}
         {{/if}}
     {{else}}
         <h1>Welcome to the Appointment <a href="/auth/login"> Login </a> to start using the app </h1>

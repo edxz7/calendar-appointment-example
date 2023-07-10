@@ -12,10 +12,13 @@ const appointmentSchema = new Schema(
             type: String,
             default: '60'
         },
-        calendar: {
+        scheduledTimeBlocks: [ Number ],
+        cancelledTimeBlocks: [ Number ],
+        // un appointment solo estar asociado a un solo dia, un dia puede tener muchos appointments
+        dayId: {
             type: Schema.Types.ObjectId,
-            ref: 'Calendar' 
-        },
+            ref: 'Day'
+        }
     }
 )
 
