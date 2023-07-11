@@ -52,9 +52,12 @@ router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
     calendarData = await Calendar.findOne({ userId })
     .populate('userId')
     .populate({
-     path: 'days'
-    })
-    // console.log('calendarData: ', calendarData);
+        path: 'days', 
+        populate: { 
+           path: 'appointments', 
+           model: 'Appointment'
+       }
+   })
   
   
     // Generamos la información necesaria para crear un calendario
@@ -63,7 +66,8 @@ router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
     // si queremos limitar el rango de horas a menos de 24, indicamos un "start" y un "end" hour
     const calendar = createCalendar(calendarData, 6, 20);
   
-  
+    console.log('calendar: ', calendar);
+
     // console.log('data: ', data)
     res.render("calendar/calendar", { rows: calendar.rows });
   });

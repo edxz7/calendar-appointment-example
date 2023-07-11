@@ -11,7 +11,8 @@ module.exports = (req, res, next) => {
         next()
     } else {
         req.app.locals.isUser = false
-        console.log('req.app.locals.isUser: ', req.app.locals.isUser);
         res.redirect('/calendar')
     }
+    console.log('req.app.locals.isUser: ', req.app.locals.isUser);
+
 }

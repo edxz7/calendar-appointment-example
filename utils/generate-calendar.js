@@ -6,6 +6,7 @@
    * @returns 
    */
   function generateCalendar(calendarData, startHour = 0, endHour = 24) {
+    const weekDays = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
     const data = {
       rows: []
     };
@@ -28,17 +29,23 @@
      */
     for (let i = startHour; i < endHour; i++) {
       let cols = []
-      for (const day of calendarData.days) {
-        // for (let j = 0; j < calendarData.day.length; j++) {
-        const { openTimeBlocks, appointments } = day;
+      for (let j = 0; j < weekDays.length; j++) {
+        const  day = calendarData && calendarData.days.filter(d => d.name === weekDays[j])
+        const [{ openTimeBlocks, appointments }] = (day && day.length > 0) ? day : [{ openTimeBlocks: [], appointments: [] } ]
         const isOpen = openTimeBlocks && openTimeBlocks.includes(i)
+        console.log('day: ', day);
+        // console.log('openTimeBlocks: ', openTimeBlocks);
+        // console.log('isOpen: ', isOpen);
         // we summarize all the appointments of the day, and
         const isBooked = appointments && appointments.flatMap(a => a.scheduledTimeBlocks).includes(i)
+        console.log('appointments: ', appointments);
+        console.log('isBooked: ', isBooked);
+        
         cols.push({
           // revisamos si ya estaba abierto ese horario o si ya habia una reservacion 
           isOpen,
           isBooked,
-          day: day.name,
+          day: weekDays[j],
           hour: i
         })
       }
