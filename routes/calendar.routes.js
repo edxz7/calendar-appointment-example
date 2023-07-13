@@ -12,7 +12,12 @@ router.post('/create', isLoggedIn, isAdmin, async (req, res, next) => {
 
     const { _id: userId } = req.session.currentUser;
     // si el Admin ya tiene un calendario, lo traemos para actualizarlo
-    const calendar = await Calendar.findOne({userId});
+    const calendar = await Calendar.findOne({userId}).populate({
+        path: 'days'
+    });
+    // we store the old opened time blocks of each day in oldDays
+    const oldDays = calendar.days
+    console.log('oldDays: ', oldDays);
     let calendarId =  calendar && calendar._id;
     if(!calendarId) {
         // si no tenia, creamos un nuevo calendario
@@ -25,10 +30,15 @@ router.post('/create', isLoggedIn, isAdmin, async (req, res, next) => {
     // en este array vamos a guardar los ids de los dias seleccionados en el form
     const newDays = [];
     for (const day of Object.keys(req.body)) {
+        // recuperamos las citas que teniamos en el viejo calendario
+        const appointments = oldDays.filter(oldDay => oldDay.name === day)
+        .flatMap(day => day.appointments)
+        console.log('recovered appointments', appointments);
         const calendarDay = await Day.create({
             date: new Date(), //
             name: day,
-            openTimeBlocks: req.body[day]
+            openTimeBlocks: req.body[day],
+            appointments 
         }); 
         newDays.push(calendarDay._id);
     }
@@ -37,7 +47,7 @@ router.post('/create', isLoggedIn, isAdmin, async (req, res, next) => {
     await Calendar.findByIdAndUpdate(
         calendarId, // buscamos el calendario asociado al user
         { $set: { days: newDays } }, // y le agregamos los dias creados
-        { new: true } 
+        { new: true }, 
     )
 
     console.log('req.body: ', req.body);
