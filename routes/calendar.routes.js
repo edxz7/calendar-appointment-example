@@ -8,7 +8,7 @@ const createCalendar = require('../utils/generate-calendar');
 const isUser = require('../middleware/isUser');
 
 // Esta ruta solo puede ser llamada por admins
-router.post('/create', isLoggedIn, isAdmin, async (req, res, next) => {
+router.post('/create', async (req, res, next) => {
 
     const { _id: userId } = req.session.currentUser;
     // si el Admin ya tiene un calendario, lo traemos para actualizarlo
@@ -55,7 +55,7 @@ router.post('/create', isLoggedIn, isAdmin, async (req, res, next) => {
 })
 
 /* GET calendar associated to an trainer/store/etc... */
-router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
     const { _id: userId, role } = req.session.currentUser;
     let calendarData;
     // si el usuario logueado es un admin revisamos si ya tiene un calendario asociado
