@@ -33,9 +33,10 @@ const calendarRoutes = require("./routes/calendar.routes");
 const ownerRoutes = require('./routes/owner.routes');
 const isUser = require("./middleware/isUser");
 const isLoggedIn = require("./middleware/isLoggedIn");
+const isAdmin = require("./middleware/isAdmin");
 app.use("/auth", authRoutes);
 app.use("/appointment", appointmentRoutes);
-app.use("/calendar", calendarRoutes);
+app.use("/calendar",isLoggedIn, isAdmin, calendarRoutes);
 app.use("/owner", isLoggedIn, isUser, ownerRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes

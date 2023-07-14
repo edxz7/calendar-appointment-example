@@ -24,7 +24,7 @@
                                     {{#each cols}}
                                         {{#if isBooked}} 
                                             <td class="p-0"> 
-                                                <input type="checkbox" class="btn-check" id="btn-check-outlined-{{day}}-{{hour}}" checked autocomplete="off" name="{{day}}" value="{{hour}}">
+                                                <input type="checkbox" class="btn-check" id="btn-check-outlined-{{day}}-{{hour}}" checked autocomplete="off" name="{{day}}" value="{{hour}}" disabled>
                                                 <label class="btn btn-outline-danger d-block hide-text" for="btn-check-outlined-{{day}}-{{hour}}"> + </label>
                                             </td>   
                                         {{else if isOpen}}
@@ -50,7 +50,7 @@
         
         {{#if isUser}}
             <p>You are logged as Normal User</p>
-            <p>You can schedule appointments in the available hours of you choosen calendar</p>
+            <p>You can schedule appointments in the available hours of your chosen calendar</p>
 
             {{#if calendarId}}
                 <div class="row d-flex justify-content">
